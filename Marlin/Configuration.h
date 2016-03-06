@@ -352,9 +352,9 @@ const bool Z_MIN_PROBE_ENDSTOP_INVERTING = true; // set to true to invert the lo
 
 // Disables axis when it's not being used.
 // WARNING: When motors turn off there is a chance of losing position accuracy!
-#define DISABLE_X true  // SirGeekALot: Use true for the CL-260A.
+#define DISABLE_X false
 #define DISABLE_Y false
-#define DISABLE_Z true  // SirGeekALot: Use true for the CL-260A.
+#define DISABLE_Z false
 
 // @section extruder
 
@@ -364,9 +364,9 @@ const bool Z_MIN_PROBE_ENDSTOP_INVERTING = true; // set to true to invert the lo
 // @section machine
 
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
-#define INVERT_X_DIR false
+#define INVERT_X_DIR true  // SirGeekALot: Use true for the CL-260A.
 #define INVERT_Y_DIR true
-#define INVERT_Z_DIR false
+#define INVERT_Z_DIR true  // SirGeekALot: Use true for the CL-260A.
 
 // @section extruder
 
