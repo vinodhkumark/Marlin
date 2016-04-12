@@ -19,6 +19,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+<<<<<<< HEAD
 
 /**
  * Example configuration file for OpenBeam Kossel Pro
@@ -27,6 +28,16 @@
  */
 
 /**
+=======
+
+/**
+ * Example configuration file for OpenBeam Kossel Pro
+ * tested on 2015-05-19 by @Wackerbarth
+ * using Arduino 1.6.5 (Mac)
+ */
+
+/**
+>>>>>>> refs/remotes/MarlinFirmware/RC
  * Configuration.h
  *
  * Basic settings such as:

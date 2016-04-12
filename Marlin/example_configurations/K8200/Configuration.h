@@ -637,12 +637,21 @@ const bool Z_MIN_PROBE_ENDSTOP_INVERTING = false; // set to true to invert the l
   //#define FIX_MOUNTED_PROBE
 
   // A Servo Probe can be defined in the servo section below.
+<<<<<<< HEAD
 
   // An Allen Key Probe is currently predefined only in the delta example configurations.
 
   //#define Z_PROBE_SLED // Enable if you have a Z probe mounted on a sled like those designed by Charles Bell.
   //#define SLED_DOCKING_OFFSET 5 // The extra distance the X axis must travel to pickup the sled. 0 should be fine but you can push it further if you'd like.
 
+=======
+
+  // An Allen Key Probe is currently predefined only in the delta example configurations.
+
+  //#define Z_PROBE_SLED // Enable if you have a Z probe mounted on a sled like those designed by Charles Bell.
+  //#define SLED_DOCKING_OFFSET 5 // The extra distance the X axis must travel to pickup the sled. 0 should be fine but you can push it further if you'd like.
+
+>>>>>>> refs/remotes/MarlinFirmware/RC
   // If you've enabled AUTO_BED_LEVELING_FEATURE and are using the Z Probe for Z Homing,
   // it is highly recommended you leave Z_SAFE_HOMING enabled!
 

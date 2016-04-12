@@ -1183,7 +1183,11 @@ void disable_all_heaters() {
     WRITE_HEATER_ ## NR (LOW); \
   }
 
+<<<<<<< HEAD
   #if HAS_TEMP_HOTEND
+=======
+  #if HAS_TEMP_0 || ENABLED(HEATER_0_USES_MAX6675)
+>>>>>>> refs/remotes/MarlinFirmware/RC
     setTargetHotend(0, 0);
     soft_pwm[0] = 0;
     WRITE_HEATER_0P(LOW); // Should HEATERS_PARALLEL apply here? Then change to DISABLE_HEATER(0)

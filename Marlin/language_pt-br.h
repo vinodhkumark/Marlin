@@ -45,7 +45,10 @@
 #define MSG_LEVEL_BED_HOMING                "Homing XYZ"
 #define MSG_LEVEL_BED_WAITING               "Click to Begin"
 #define MSG_LEVEL_BED_DONE                  "Leveling Done!"
+<<<<<<< HEAD
 #define MSG_LEVEL_BED_CANCEL                "Cancel"
+=======
+>>>>>>> refs/remotes/MarlinFirmware/RC
 #define MSG_SET_HOME_OFFSETS                "Ajustar Jogo"
 #define MSG_HOME_OFFSETS_APPLIED            "Offsets applied"
 #define MSG_SET_ORIGIN                      "Ajustar orig."

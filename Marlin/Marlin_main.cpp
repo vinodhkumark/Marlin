@@ -455,6 +455,7 @@ static bool send_ok[BUFSIZE];
   #define host_keepalive() ;
   #define KEEPALIVE_STATE(n) ;
 #endif // HOST_KEEPALIVE_FEATURE
+<<<<<<< HEAD
 
 /**
  * ***************************************************************************
@@ -462,6 +463,15 @@ static bool send_ok[BUFSIZE];
  * ***************************************************************************
  */
 
+=======
+
+/**
+ * ***************************************************************************
+ * ******************************** FUNCTIONS ********************************
+ * ***************************************************************************
+ */
+
+>>>>>>> refs/remotes/MarlinFirmware/RC
 void get_available_commands();
 void process_next_command();
 
@@ -982,6 +992,7 @@ inline void get_serial_commands() {
 
   } // queue has space, serial has data
 }
+<<<<<<< HEAD
 
 #if ENABLED(SDSUPPORT)
 
@@ -989,6 +1000,15 @@ inline void get_serial_commands() {
     static bool stop_buffering = false,
                 sd_comment_mode = false;
 
+=======
+
+#if ENABLED(SDSUPPORT)
+
+  inline void get_sdcard_commands() {
+    static bool stop_buffering = false,
+                sd_comment_mode = false;
+
+>>>>>>> refs/remotes/MarlinFirmware/RC
     if (!card.sdprinting) return;
 
     /**
@@ -1915,6 +1935,7 @@ static void setup_for_endstop_move() {
 
 #endif // AUTO_BED_LEVELING_FEATURE
 
+<<<<<<< HEAD
 #if ENABLED(Z_PROBE_SLED) || ENABLED(Z_SAFE_HOMING) || ENABLED(AUTO_BED_LEVELING_FEATURE)
   static void axis_unhomed_error() {
     LCD_MESSAGEPGM(MSG_YX_UNHOMED);
@@ -1922,6 +1943,13 @@ static void setup_for_endstop_move() {
     SERIAL_ECHOLNPGM(MSG_YX_UNHOMED);
   }
 #endif
+=======
+static void axis_unhomed_error() {
+  LCD_MESSAGEPGM(MSG_YX_UNHOMED);
+  SERIAL_ECHO_START;
+  SERIAL_ECHOLNPGM(MSG_YX_UNHOMED);
+}
+>>>>>>> refs/remotes/MarlinFirmware/RC
 
 #if ENABLED(Z_PROBE_SLED)
 
@@ -2305,8 +2333,11 @@ void unknown_command_error() {
           SERIAL_ECHO_START;
           SERIAL_ECHOLNPGM(MSG_BUSY_PAUSED_FOR_INPUT);
           break;
+<<<<<<< HEAD
         default:
           break;
+=======
+>>>>>>> refs/remotes/MarlinFirmware/RC
       }
     }
     next_busy_signal_ms = ms + 10000UL; // "busy: ..." message every 10s
@@ -3765,11 +3796,19 @@ inline void gcode_M42() {
 
     for (uint8_t i = 0; i < COUNT(sensitive_pins); i++)
       if (pin_number == sensitive_pins[i]) return;
+<<<<<<< HEAD
 
     pinMode(pin_number, OUTPUT);
     digitalWrite(pin_number, pin_status);
     analogWrite(pin_number, pin_status);
 
+=======
+
+    pinMode(pin_number, OUTPUT);
+    digitalWrite(pin_number, pin_status);
+    analogWrite(pin_number, pin_status);
+
+>>>>>>> refs/remotes/MarlinFirmware/RC
     #if FAN_COUNT > 0
       switch (pin_number) {
         #if HAS_FAN0
@@ -3827,7 +3866,11 @@ inline void gcode_M42() {
     }
 
     double sum = 0.0, mean = 0.0, sigma = 0.0, sample_set[50];
+<<<<<<< HEAD
     int8_t verbose_level = 1, n_samples = 10, n_legs = 0, schizoid_flag = 0;
+=======
+    uint8_t verbose_level = 1, n_samples = 10, n_legs = 0, schizoid_flag = 0;
+>>>>>>> refs/remotes/MarlinFirmware/RC
 
     if (code_seen('V')) {
       verbose_level = code_value_short();
@@ -3960,6 +4003,7 @@ inline void gcode_M42() {
 
         for (uint8_t l = 0; l < n_legs - 1; l++) {
           double delta_angle;
+<<<<<<< HEAD
 
           if (schizoid_flag)
             // The points of a 5 point star are 72 degrees apart.  We need to
@@ -3981,6 +4025,29 @@ inline void gcode_M42() {
           X_current = X_probe_location - X_PROBE_OFFSET_FROM_EXTRUDER + cos(RADIANS(angle)) * radius;
           Y_current = Y_probe_location - Y_PROBE_OFFSET_FROM_EXTRUDER + sin(RADIANS(angle)) * radius;
 
+=======
+
+          if (schizoid_flag)
+            // The points of a 5 point star are 72 degrees apart.  We need to
+            // skip a point and go to the next one on the star.
+            delta_angle = dir * 2.0 * 72.0;
+
+          else
+            // If we do this line, we are just trying to move further
+            // around the circle.
+            delta_angle = dir * (float) random(25, 45);
+
+          angle += delta_angle;
+
+          while (angle > 360.0)   // We probably do not need to keep the angle between 0 and 2*PI, but the
+            angle -= 360.0;       // Arduino documentation says the trig functions should not be given values
+          while (angle < 0.0)     // outside of this range.   It looks like they behave correctly with
+            angle += 360.0;       // numbers outside of the range, but just to be safe we clamp them.
+
+          X_current = X_probe_location - X_PROBE_OFFSET_FROM_EXTRUDER + cos(RADIANS(angle)) * radius;
+          Y_current = Y_probe_location - Y_PROBE_OFFSET_FROM_EXTRUDER + sin(RADIANS(angle)) * radius;
+
+>>>>>>> refs/remotes/MarlinFirmware/RC
           #if DISABLED(DELTA)
             X_current = constrain(X_current, X_MIN_POS, X_MAX_POS);
             Y_current = constrain(Y_current, Y_MIN_POS, Y_MAX_POS);
@@ -4278,7 +4345,11 @@ inline void gcode_M109() {
     now = millis();
     if (now > next_temp_ms) { //Print temp & remaining time every 1s while waiting
       next_temp_ms = now + 1000UL;
+<<<<<<< HEAD
       #if HAS_TEMP_HOTEND || HAS_TEMP_BED
+=======
+      #if HAS_TEMP_0 || HAS_TEMP_BED || ENABLED(HEATER_0_USES_MAX6675)
+>>>>>>> refs/remotes/MarlinFirmware/RC
         print_heaterstates();
       #endif
       #ifdef TEMP_RESIDENCY_TIME
@@ -5483,7 +5554,11 @@ inline void gcode_M400() { st_synchronize(); }
     if (delay_index2 == -1) { //initialize the ring buffer if it has not been done since startup
       int temp_ratio = widthFil_to_size_ratio();
 
+<<<<<<< HEAD
       for (delay_index1 = 0; delay_index1 < (int)COUNT(measurement_delay); ++delay_index1)
+=======
+      for (delay_index1 = 0; delay_index1 < COUNT(measurement_delay); ++delay_index1)
+>>>>>>> refs/remotes/MarlinFirmware/RC
         measurement_delay[delay_index1] = temp_ratio - 100;  //subtract 100 to scale within a signed byte
 
       delay_index1 = delay_index2 = 0;
@@ -5755,9 +5830,13 @@ inline void gcode_M503() {
     disable_e3();
     delay(100);
     LCD_ALERTMESSAGEPGM(MSG_FILAMENTCHANGE);
+<<<<<<< HEAD
     #if DISABLED(AUTO_FILAMENT_CHANGE)
       millis_t next_tick = 0;
     #endif
+=======
+    millis_t next_tick = 0;
+>>>>>>> refs/remotes/MarlinFirmware/RC
     KEEPALIVE_STATE(PAUSED_FOR_USER);
     while (!lcd_clicked()) {
       #if DISABLED(AUTO_FILAMENT_CHANGE)
@@ -6130,10 +6209,17 @@ void process_next_command() {
     codenum = (codenum * 10) + (*cmd_ptr - '0');
     cmd_ptr++;
   } while (NUMERIC(*cmd_ptr));
+<<<<<<< HEAD
 
   // Skip all spaces to get to the first argument, or nul
   while (*cmd_ptr == ' ') cmd_ptr++;
 
+=======
+
+  // Skip all spaces to get to the first argument, or nul
+  while (*cmd_ptr == ' ') cmd_ptr++;
+
+>>>>>>> refs/remotes/MarlinFirmware/RC
   // The command's arguments (if any) start here, for sure!
   current_command_args = cmd_ptr;
 

@@ -70,9 +70,12 @@
 #ifndef MSG_LEVEL_BED_DONE
   #define MSG_LEVEL_BED_DONE                  "Leveling Done!"
 #endif
+<<<<<<< HEAD
 #ifndef MSG_LEVEL_BED_CANCEL
   #define MSG_LEVEL_BED_CANCEL                "Cancel"
 #endif
+=======
+>>>>>>> refs/remotes/MarlinFirmware/RC
 #ifndef MSG_SET_HOME_OFFSETS
   #define MSG_SET_HOME_OFFSETS                "Set home offsets"
 #endif

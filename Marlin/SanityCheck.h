@@ -174,11 +174,31 @@
  */
 #if (!((HAS_Z_MIN && ENABLED(Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN)) || HAS_Z_PROBE )) && ( ENABLED(FIX_MOUNTED_PROBE) || defined(Z_ENDSTOP_SERVO_NR) || ENABLED(Z_PROBE_ALLEN_KEY) || ENABLED(Z_PROBE_SLED))
   #error A probe needs a pin! [Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN || HAS_Z_PROBE]
+<<<<<<< HEAD
+=======
+#endif
+
+#if ((HAS_Z_MIN && ENABLED(Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN)) && HAS_Z_PROBE) && ( ENABLED(FIX_MOUNTED_PROBE) || defined(Z_ENDSTOP_SERVO_NR) || ENABLED(Z_PROBE_ALLEN_KEY) || ENABLED(Z_PROBE_SLED))
+  #error A probe should not be connected to more then one pin! [Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN || HAS_Z_PROBE]
+>>>>>>> refs/remotes/MarlinFirmware/RC
 #endif
 
 #if ((HAS_Z_MIN && ENABLED(Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN)) && HAS_Z_PROBE) && ( ENABLED(FIX_MOUNTED_PROBE) || defined(Z_ENDSTOP_SERVO_NR) || ENABLED(Z_PROBE_ALLEN_KEY) || ENABLED(Z_PROBE_SLED))
   #error A probe should not be connected to more then one pin! [Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN || HAS_Z_PROBE]
 #endif
+
+/**
+  * Require one kind of probe
+  */
+#if ENABLED(AUTO_BED_LEVELING_FEATURE) && !( ENABLED(FIX_MOUNTED_PROBE) || defined(Z_ENDSTOP_SERVO_NR) || ENABLED(Z_PROBE_ALLEN_KEY) || ENABLED(Z_PROBE_SLED))
+  #error For AUTO_BED_LEVELING_FEATURE define one kind of probe! {Servo | Z_PROBE_ALLEN_KEY | Z_PROBE_SLED | FIX_MOUNTED_PROBE]
+#endif
+
+#if ENABLED(Z_SAFE_HOMING)&& !( ENABLED(FIX_MOUNTED_PROBE) || defined(Z_ENDSTOP_SERVO_NR) || ENABLED(Z_PROBE_ALLEN_KEY) || ENABLED(Z_PROBE_SLED))
+  #error For Z_SAFE_HOMING define one kind of probe! {Servo | Z_PROBE_ALLEN_KEY | Z_PROBE_SLED | FIX_MOUNTED_PROBE]
+#endif
+
+// To do: Fail with more then one probe defined
 
 /**
   * Require one kind of probe
@@ -464,15 +484,22 @@
 #elif defined(SDSLOW)
   #error SDSLOW deprecated. Set SPI_SPEED to SPI_HALF_SPEED instead.
 #elif defined(SDEXTRASLOW)
+<<<<<<< HEAD
   #error SDEXTRASLOW deprecated. Set SPI_SPEED to SPI_QUARTER_SPEED instead.
+=======
+  #error SDEXTRASLOW deprecated - set SPI_SPEED to SPI_QUARTER_SPEED instead
+>>>>>>> refs/remotes/MarlinFirmware/RC
 #elif defined(Z_RAISE_BEFORE_HOMING)
   #error Z_RAISE_BEFORE_HOMING is deprecated. Use MIN_Z_HEIGHT_FOR_HOMING instead.
 #elif defined(FILAMENT_SENSOR)
   #error FILAMENT_SENSOR is deprecated. Use FILAMENT_WIDTH_SENSOR instead.
+<<<<<<< HEAD
 #elif defined(DISABLE_MAX_ENDSTOPS) || defined(DISABLE_MIN_ENDSTOPS)
   #error DISABLE_MAX_ENDSTOPS and DISABLE_MIN_ENDSTOPS deprecated. Use individual USE_*_PLUG options instead.
 #elif ENABLED(Z_DUAL_ENDSTOPS) && !defined(Z2_USE_ENDSTOP)
   #error Z_DUAL_ENDSTOPS settings are simplified. Just set Z2_USE_ENDSTOP to the endstop you want to repurpose for Z2
+=======
+>>>>>>> refs/remotes/MarlinFirmware/RC
 #endif
 
 #endif //SANITYCHECK_H

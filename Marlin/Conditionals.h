@@ -638,8 +638,11 @@
 
   #define HAS_MOTOR_CURRENT_PWM (PIN_EXISTS(MOTOR_CURRENT_PWM_XY) || PIN_EXISTS(MOTOR_CURRENT_PWM_Z) || PIN_EXISTS(MOTOR_CURRENT_PWM_E))
 
+<<<<<<< HEAD
   #define HAS_TEMP_HOTEND (HAS_TEMP_0 || ENABLED(HEATER_0_USES_MAX6675))
 
+=======
+>>>>>>> refs/remotes/MarlinFirmware/RC
   /**
    * Helper Macros for heaters and extruder fan
    */
@@ -678,10 +681,17 @@
   #if HAS_FAN0
     #define WRITE_FAN(v) WRITE(FAN_PIN, v)
     #define WRITE_FAN0(v) WRITE_FAN(v)
+<<<<<<< HEAD
   #endif
   #if HAS_FAN1
     #define WRITE_FAN1(v) WRITE(FAN1_PIN, v)
   #endif
+=======
+  #endif
+  #if HAS_FAN1
+    #define WRITE_FAN1(v) WRITE(FAN1_PIN, v)
+  #endif
+>>>>>>> refs/remotes/MarlinFirmware/RC
   #if HAS_FAN2
     #define WRITE_FAN2(v) WRITE(FAN2_PIN, v)
   #endif

@@ -224,9 +224,15 @@
   #define Y_MAX_PIN          -1
 #endif
 
+<<<<<<< HEAD
 #if DISABLED(USE_ZMAX_PLUG)
   #undef Z_MAX_PIN
   #define Z_MAX_PIN          -1
+=======
+#if ENABLED(DISABLE_YMAX_ENDSTOP)
+  #undef Y_MAX_PIN
+  #define Y_MAX_PIN          -1
+>>>>>>> refs/remotes/MarlinFirmware/RC
 #endif
 
 #if DISABLED(USE_XMIN_PLUG)
