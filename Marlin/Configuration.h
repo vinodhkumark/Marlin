@@ -825,7 +825,7 @@ const bool Z_MIN_PROBE_ENDSTOP_INVERTING = true; // set to true to invert the lo
 // SD Card support is disabled by default. If your controller has an SD slot,
 // you must uncomment the following option or it won't work.
 //
-//#define SDSUPPORT
+#define SDSUPPORT // SirGeekALot: Uncommented this line for SD card support from left side of LCD Panel in CL-260A.
 
 //
 // SD CARD: SPI SPEED
