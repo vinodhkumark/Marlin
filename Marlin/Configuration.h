@@ -97,7 +97,8 @@
 
 // This determines the communication speed of the printer
 // :[2400,9600,19200,38400,57600,115200,250000]
-#define BAUDRATE 250000
+#define BAUDRATE 115200
+
 
 // Enable the Bluetooth serial interface on AT90USB devices
 //#define BLUETOOTH
@@ -105,7 +106,7 @@
 // The following define selects which electronics board you have.
 // Please choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_RAMPS_14_EFB
+  #define MOTHERBOARD 33
 #endif
 
 // Optional custom name for your RepStrap or other custom machine
@@ -243,13 +244,14 @@
   #define PID_FUNCTIONAL_RANGE 10 // If the temperature difference between the target temperature and the actual temperature
                                   // is more than PID_FUNCTIONAL_RANGE then the PID will be shut off and the heater will be set to min/max.
   #define PID_INTEGRAL_DRIVE_MAX PID_MAX  //limit for the integral term
-  #define K1 0.95 //smoothing factor within the PID
+  #define K1 0.99 //smoothing factor within the PID
+//  #define PID_dT ((OVERSAMPLENR * 4.0)/(F_CPU / 64.0 / 256.0)) //sampling period of the temperature routine
 
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
   // SirGeekALot: CL-260A PID autotune results
-  #define  DEFAULT_Kp 29.79
-  #define  DEFAULT_Ki 2.31
-  #define  DEFAULT_Kd 95.90
+  #define  DEFAULT_Kp 27.23
+  #define  DEFAULT_Ki 2.20
+  #define  DEFAULT_Kd 84.33
 
   // Ultimaker
   //#define  DEFAULT_Kp 22.2
@@ -280,7 +282,7 @@
 // If your configuration is significantly different than this and you don't understand the issues involved, you probably
 // shouldn't use bed PID until someone else verifies your hardware works.
 // If this is enabled, find your own PID constants below.
-//#define PIDTEMPBED
+// #define PIDTEMPBED
 
 //#define BED_LIMIT_SWITCHING
 
@@ -298,9 +300,9 @@
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define  DEFAULT_bedKp 10.00
-  #define  DEFAULT_bedKi .023
-  #define  DEFAULT_bedKd 305.4
+  #define  DEFAULT_bedKp 373.66
+  #define  DEFAULT_bedKi 69.11
+  #define  DEFAULT_bedKd 505.10
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from pidautotune
@@ -339,7 +341,7 @@
  */
 
 #define THERMAL_PROTECTION_HOTENDS // Enable thermal protection for all extruders
-#define THERMAL_PROTECTION_BED     // Enable thermal protection for the heated bed
+//#define THERMAL_PROTECTION_BED     // Enable thermal protection for the heated bed
 
 //===========================================================================
 //============================= Mechanical Settings =========================
@@ -366,10 +368,10 @@
 // Almost all printers will be using one per axis. Probes will use one or more of the
 // extra connectors. Leave undefined any used for non-endstop and non-probe purposes.
 #define USE_XMIN_PLUG
-#define USE_YMIN_PLUG
+//#define USE_YMIN_PLUG
 #define USE_ZMIN_PLUG
 //#define USE_XMAX_PLUG
-//#define USE_YMAX_PLUG
+#define USE_YMAX_PLUG
 //#define USE_ZMAX_PLUG
 
 // coarse Endstop Settings
@@ -469,9 +471,9 @@ const bool Z_MIN_PROBE_ENDSTOP_INVERTING = true; // set to true to invert the lo
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
 // SirGeekALot: going from the RAMPS power connector to the LCD panel connector on
 // the CL-260A, ALL the stepper motor connectors have their wires connected: red, blue, green, then black.
-#define INVERT_X_DIR true // SirGeekALot: Use true for the CL-260A.
+#define INVERT_X_DIR false // SirGeekALot: Use true for the CL-260A.
 #define INVERT_Y_DIR true // SirGeekALot: Use true for the CL-260A.
-#define INVERT_Z_DIR true // SirGeekALot: Use true for the CL-260A.
+#define INVERT_Z_DIR false // SirGeekALot: Use true for the CL-260A.
 
 // @section extruder
 
@@ -489,7 +491,7 @@ const bool Z_MIN_PROBE_ENDSTOP_INVERTING = true; // set to true to invert the lo
 // Sets direction of endstops when homing; 1=MAX, -1=MIN
 // :[-1,1]
 #define X_HOME_DIR -1
-#define Y_HOME_DIR -1
+#define Y_HOME_DIR 1
 #define Z_HOME_DIR -1
 
 #define min_software_endstops true // If true, axis won't move to coordinates less than HOME_POS.
@@ -567,6 +569,7 @@ const bool Z_MIN_PROBE_ENDSTOP_INVERTING = true; // set to true to invert the lo
   // Enable this to sample the bed in a grid (least squares solution).
   // Note: this feature generates 10KB extra code size.
   #define AUTO_BED_LEVELING_GRID
+
 
   #if ENABLED(AUTO_BED_LEVELING_GRID)
 
@@ -681,6 +684,9 @@ const bool Z_MIN_PROBE_ENDSTOP_INVERTING = true; // set to true to invert the lo
 #endif
 
 
+
+
+
 // @section movement
 
 /**
@@ -692,20 +698,20 @@ const bool Z_MIN_PROBE_ENDSTOP_INVERTING = true; // set to true to invert the lo
 // default settings
 
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   {80,80,4000,500}  // default steps per unit for Ultimaker // SirGeekALot: This was the Marlin default.
-#define DEFAULT_AXIS_STEPS_PER_UNIT   {80,80,1600,145}  // SirGeekALot: CL-260A settings {x,y,z,e} for the included A4988 stepper drivers (1/16 uStepping).
+#define DEFAULT_AXIS_STEPS_PER_UNIT   {80,80,1600,164.8}  // SirGeekALot: CL-260A settings {x,y,z,e} for the included A4988 stepper drivers (1/16 uStepping).
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   {160,160,3200,290} // SirGeekALot: CL-260A settings {x,y,z,e} after upgrading to DRV8825 stepper drivers (1/32 uStepping).
 // SirGeekALot: the DRV8825 drivers failed to drive all stepper motors after jogging more than 2 axes.
 // I suspect the included power supply does provide enough wattage for these higher current drivers.
 // I may retry this upgrade later with a higher wattage power supply, so I'm leaving this in here for now.
 #define DEFAULT_MAX_FEEDRATE          {300, 300, 5, 25}    // (mm/sec)
-#define DEFAULT_MAX_ACCELERATION      {3000,3000,100,10000}    // X, Y, Z, E maximum start speed for accelerated moves. E default values are good for Skeinforge 40+, for older versions raise them a lot.
+#define DEFAULT_MAX_ACCELERATION      {9000,9000,100,10000}    // X, Y, Z, E maximum start speed for accelerated moves. E default values are good for Skeinforge 40+, for older versions raise them a lot.
 
 #define DEFAULT_ACCELERATION          3000    // X, Y, Z and E acceleration in mm/s^2 for printing moves
 #define DEFAULT_RETRACT_ACCELERATION  3000    // E acceleration in mm/s^2 for retracts
 #define DEFAULT_TRAVEL_ACCELERATION   3000    // X, Y, Z acceleration in mm/s^2 for travel (non printing) moves
 
 // The speed change that does not require acceleration (i.e. the software might assume it can be done instantaneously)
-#define DEFAULT_XYJERK                18.0    // (mm/sec)  // SirGeekALot: Marlin default was 20.0. Testing a 10% reduction to see if it improves print quality and reliability.
+#define DEFAULT_XYJERK                20.0    // (mm/sec)  // SirGeekALot: Marlin default was 20.0. Testing a 10% reduction to see if it improves print quality and reliability.
 #define DEFAULT_ZJERK                 0.4     // (mm/sec)
 #define DEFAULT_EJERK                 5.0    // (mm/sec)
 
@@ -736,7 +742,7 @@ const bool Z_MIN_PROBE_ENDSTOP_INVERTING = true; // set to true to invert the lo
 // M501 - reads parameters from EEPROM (if you need reset them after you changed them temporarily).
 // M502 - reverts to the default "factory settings".  You still need to store them in EEPROM afterwards if you want to.
 //define this to enable EEPROM support
-//#define EEPROM_SETTINGS
+#define EEPROM_SETTINGS
 
 #if ENABLED(EEPROM_SETTINGS)
   // To disable EEPROM Serial responses and decrease program space by ~1700 byte: comment this out:
@@ -981,6 +987,9 @@ const bool Z_MIN_PROBE_ENDSTOP_INVERTING = true; // set to true to invert the lo
 //
 //#define BQ_LCD_SMART_CONTROLLER
 
+
+
+
 //
 // CONTROLLER TYPE: I2C
 //
@@ -998,6 +1007,7 @@ const bool Z_MIN_PROBE_ENDSTOP_INVERTING = true; // set to true to invert the lo
 // Sainsmart YW Robot (LCM1602) LCD Display
 //
 //#define LCD_I2C_SAINSMART_YWROBOT
+
 
 //
 // Generic LCM1602 LCD adapter
@@ -1021,6 +1031,9 @@ const bool Z_MIN_PROBE_ENDSTOP_INVERTING = true; // set to true to invert the lo
 // integrated click & L/R/U/D buttons, separate encoder inputs.
 //
 //#define LCD_I2C_VIKI
+
+
+
 
 //
 // SSD1306 OLED full graphics generic display
